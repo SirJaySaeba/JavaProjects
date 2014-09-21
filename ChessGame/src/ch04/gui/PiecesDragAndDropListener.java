@@ -1,12 +1,12 @@
-package ch03.gui;
+package ch04.gui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
-import ch03.logic.ChessGame;
-import ch03.logic.Piece;
+import ch04.logic.ChessGame;
+import ch04.logic.Piece;
 
 public class PiecesDragAndDropListener implements MouseListener, MouseMotionListener {
 
@@ -62,6 +62,8 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
 					this.dragOffsetY = y - guiPiece.getY();
 					this.dragPiece = guiPiece;
 					break;
+				}else{
+					// player color and game state do not match, so we move nothing
 				}
 			}
 		}

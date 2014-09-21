@@ -1,8 +1,8 @@
-package ch03.gui;
+package ch04.gui;
 
 import java.awt.Image;
 
-import ch03.logic.Piece;
+import ch04.logic.Piece;
 
 public class GuiPiece {
 	

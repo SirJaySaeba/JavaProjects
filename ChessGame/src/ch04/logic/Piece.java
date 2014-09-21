@@ -1,4 +1,4 @@
-package ch03.logic;
+package ch04.logic;
 
 
 public class Piece {

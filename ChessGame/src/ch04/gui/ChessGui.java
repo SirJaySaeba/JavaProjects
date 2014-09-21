@@ -1,4 +1,4 @@
-package ch03.gui;
+package ch04.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,8 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ch03.logic.ChessGame;
-import ch03.logic.Piece;
+import ch04.logic.ChessGame;
+import ch04.logic.Piece;
 
 /**
  * all x and y coordinates point to the upper left position of a component all
@@ -22,17 +22,17 @@ import ch03.logic.Piece;
  * 
  */
 public class ChessGui extends JPanel {
-	
-	private static final long serialVersionUID = 3951307773685425235L;
-	
-	private static final int BOARD_START_X = 301;
-	private static final int BOARD_START_Y = 51;
 
-	private static final int SQUARE_WIDTH = 50;
-	private static final int SQUARE_HEIGHT = 50;
+	private static final long serialVersionUID = -8340233268595757126L;
 
-	private static final int PIECE_WIDTH = 48;
-	private static final int PIECE_HEIGHT = 48;
+	private static final int BOARD_START_X = 100;
+	private static final int BOARD_START_Y = 20;
+
+	private static final int SQUARE_WIDTH = 20;
+	private static final int SQUARE_HEIGHT = 20;
+
+	private static final int PIECE_WIDTH = 20;
+	private static final int PIECE_HEIGHT = 20;
 	
 	private static final int PIECES_START_X = BOARD_START_X + (int)(SQUARE_WIDTH/2.0 - PIECE_WIDTH/2.0);
 	private static final int PIECES_START_Y = BOARD_START_Y + (int)(SQUARE_HEIGHT/2.0 - PIECE_HEIGHT/2.0);
@@ -50,7 +50,7 @@ public class ChessGui extends JPanel {
 		this.setLayout(null);
 
 		// background
-		URL urlBackgroundImg = getClass().getResource("/ch03/img/bo.png");
+		URL urlBackgroundImg = getClass().getResource("/ch04/gui/img/bo.png");
 		this.imgBackground = new ImageIcon(urlBackgroundImg).getImage();
 		
 		// create chess game
@@ -149,7 +149,7 @@ public class ChessGui extends JPanel {
 		}
 		filename += ".png";
 
-		URL urlPieceImg = getClass().getResource("/ch03/img/" + filename);
+		URL urlPieceImg = getClass().getResource("/ch04/gui/img/" + filename);
 		return new ImageIcon(urlPieceImg).getImage();
 	}
 

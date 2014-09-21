@@ -1,4 +1,4 @@
-package ch03.logic;
+package ch04.logic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +76,15 @@ public class ChessGame {
 	public void movePiece(int sourceRow, int sourceColumn, int targetRow, int targetColumn) {
 		Piece piece = getNonCapturedPieceAtLocation(sourceRow, sourceColumn);
 		
+		if( piece == null){
+			throw new IllegalArgumentException("No piece at source location");
+		}
+		
+		if( piece.getColor() == Piece.COLOR_WHITE && this.gameState != ChessGame.GAME_STATE_WHITE
+				|| piece.getColor() == Piece.COLOR_BLACK && this.gameState != ChessGame.GAME_STATE_BLACK){
+			throw new IllegalArgumentException("It's not your turn");
+		}
+		
 		//check if the move is capturing an opponent piece
 		int opponentColor = (piece.getColor()==Piece.COLOR_BLACK?Piece.COLOR_WHITE:Piece.COLOR_BLACK);
 		if( isNonCapturedPieceAtLocation(opponentColor, targetRow, targetColumn)){
@@ -94,7 +103,7 @@ public class ChessGame {
 	 * @param column one of Piece.COLUMN_..
 	 * @return the first not captured piece at the specified location
 	 */
-	private Piece getNonCapturedPieceAtLocation(int row, int column) {
+	public Piece getNonCapturedPieceAtLocation(int row, int column) {
 		for (Piece piece : this.pieces) {
 			if( piece.getRow() == row
 					&& piece.getColumn() == column

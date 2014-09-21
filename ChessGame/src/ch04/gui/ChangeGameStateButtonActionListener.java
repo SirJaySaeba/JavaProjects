@@ -1,4 +1,4 @@
-package ch03.gui;
+package ch04.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
