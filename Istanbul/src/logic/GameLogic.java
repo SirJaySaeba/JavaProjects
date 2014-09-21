@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import locations.Location;
+import locations.places.Brunnen;
 
 public class GameLogic {
 	
@@ -13,32 +14,30 @@ public class GameLogic {
 
 	public GameLogic(){
 		
-		List<String> AllAvailableLocations = new ArrayList<>();
-		prepareLocations(AllAvailableLocations);
+		
+		
 		Collection<String> setLocations = new ArrayList<>();
 		
-		for(int i = 0; i<16; i++){			
+		for(int i = 0; i<2; i++){			
 			int randColumn = (int)(Math.random() * 16)%4;
 			int randRow = (int)(Math.random() * 16)%4;
 			
-			if(!setLocations.contains(Location.getLocationCoordinates(randRow, randColumn))){				
-				setLocations.add(Location.getLocationCoordinates(randRow, randColumn));
-				addLocationToMap(AllAvailableLocations.get(i), randRow, randColumn);
-			}else{
-				i--;
-				continue;
-			}
+			Location brunnen = new Brunnen(randRow, randColumn);
+			this.locations.add(brunnen);
+			
+//			if(!setLocations.contains(Location.getLocationCoordinates(randRow, randColumn))){				
+//				setLocations.add(Location.getLocationCoordinates(randRow, randColumn));
+//				addLocationToMap(AllAvailableLocations.get(i), randRow, randColumn);
+//			}else{
+//				i--;
+//				continue;
+//			}
 			
 		}
 		
 
 	}
-
-	private void addLocationToMap(String type, int row, int column) {
-		Location location = new Location(type, row, column);
-		
-		this.locations.add(location);
-	}
+	
 	private void prepareLocations(List<String> setOfLocations){
 
 		setOfLocations.add(Location.TEESTUBE);
@@ -73,7 +72,7 @@ public class GameLogic {
 	/**
 	 * @return the internal list of pieces
 	 */
-	public List<Location> getPieces() {
+	public List<Location> getLocations() {
 		return this.locations;
 	}
 

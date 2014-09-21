@@ -54,7 +54,7 @@ public class IstanbulGui extends JPanel {
 		this.chessGame = new GameLogic();
 		
 		//wrap game pieces into their graphical representation
-		for (Location piece : this.chessGame.getPieces()) {
+		for (Location piece : this.chessGame.getLocations()) {
 			createAndAddGuiPiece(piece);
 		}
 
@@ -67,7 +67,7 @@ public class IstanbulGui extends JPanel {
 	}
 
 	private void createAndAddGuiPiece(Location piece) {
-		Image img = this.getImageForPiece(piece.getType());
+		Image img = this.getImageForPiece(piece.getName());
 		LocationGui guiPiece = new LocationGui(img, piece);
 		this.guiPieces.add(guiPiece);
 	}

@@ -1,9 +1,11 @@
 package locations;
 
+import java.awt.Image;
+
 
 public class Location {
 
-	private String type;
+	private String name;
 	public static final String LAGER_OBST = "obstlager";
 	public static final String LAGER_TUCH = "tuchlager";
 	public static final String LAGER_GEWUERZ = "gewuerzlager";
@@ -34,11 +36,14 @@ public class Location {
 	public static final int COLUMN_D = 3;
 
 	private boolean isCaptured = false;
+	private Image image;
 
-	public Location(String type, int row, int column) {
-		this.row = row;
-		this.column = column;
-		this.type = type;
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	public int getRow() {
@@ -57,8 +62,8 @@ public class Location {
 		this.column = column;
 	}
 
-	public String getType() {
-		return this.type;
+	public String getName() {
+		return this.name;
 	}
 	
 	public static String getRowString(int row){
