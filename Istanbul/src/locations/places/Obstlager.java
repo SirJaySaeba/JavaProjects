@@ -2,9 +2,9 @@ package locations.places;
 
 import locations.Lager;
 
-public class Tuchlager extends Lager{
+public class Obstlager extends Lager{
 
-	private static final String name = "tuchlager";
+	private static final String name = "obstlager";
 	private int row;
 	private int column;
 

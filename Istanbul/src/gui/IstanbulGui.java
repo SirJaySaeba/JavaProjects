@@ -40,8 +40,8 @@ public class IstanbulGui extends JPanel {
 
 	private Image imgBackground;
 	
-	private GameLogic chessGame;
-	private List<LocationGui> guiPieces = new ArrayList<LocationGui>();
+	private GameLogic istanbulGame;
+	private List<LocationGui> guiLocations = new ArrayList<LocationGui>();
 
 	public IstanbulGui() {
 		this.setLayout(null);
@@ -51,11 +51,11 @@ public class IstanbulGui extends JPanel {
 		this.imgBackground = new ImageIcon(urlBackgroundImg).getImage();
 
 		// create chess game
-		this.chessGame = new GameLogic();
+		this.istanbulGame = new GameLogic();
 		
 		//wrap game pieces into their graphical representation
-		for (Location piece : this.chessGame.getLocations()) {
-			createAndAddGuiPiece(piece);
+		for (Location location : this.istanbulGame.getLocations()) {
+			createAndAddGuiLocation(location);
 		}
 
 		JFrame f = new JFrame();
@@ -66,13 +66,13 @@ public class IstanbulGui extends JPanel {
 		f.setSize(imgBackground.getWidth(null), imgBackground.getHeight(null));
 	}
 
-	private void createAndAddGuiPiece(Location piece) {
-		Image img = this.getImageForPiece(piece.getName());
-		LocationGui guiPiece = new LocationGui(img, piece);
-		this.guiPieces.add(guiPiece);
+	private void createAndAddGuiLocation(Location location) {
+		Image img = this.getImageForLocation(location.getName());
+		LocationGui guiLocation = new LocationGui(img, location);
+		this.guiLocations.add(guiLocation);
 	}
 
-	private Image getImageForPiece(String type) {
+	private Image getImageForLocation(String type) {
 
 		String filename = type+".png";
 
@@ -84,7 +84,7 @@ public class IstanbulGui extends JPanel {
 	protected void paintComponent(Graphics g) {
 		g.drawImage(this.imgBackground, 0, 0, null);
 
-		for (LocationGui guiPiece : this.guiPieces) {
+		for (LocationGui guiPiece : this.guiLocations) {
 				g.drawImage(guiPiece.getImage(), guiPiece.getX(), guiPiece.getY(), null);
 		}
 	}

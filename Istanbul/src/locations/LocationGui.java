@@ -14,7 +14,7 @@ public class LocationGui {
 	public LocationGui(Image img, Location location) {
 		this.img = img;
 		this.location = location;
-		this.resetToUnderlyingPiecePosition(location);
+		this.resetLocationPosition(location);
 	}
 
 	public Image getImage() {
@@ -45,7 +45,7 @@ public class LocationGui {
 		return img.getHeight(null);
 	}
 
-	public void resetToUnderlyingPiecePosition(Location location) {
+	public void resetLocationPosition(Location location) {
 		this.x = IstanbulGui.convertColumnToX(location.getColumn());
 		this.y = IstanbulGui.convertRowToY(location.getRow());
 	}

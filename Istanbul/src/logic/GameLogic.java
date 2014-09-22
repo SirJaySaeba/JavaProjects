@@ -1,77 +1,85 @@
 package logic;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import locations.Location;
 import locations.places.Brunnen;
+import locations.places.Edelsteinhaendler;
+import locations.places.Gewuerzlager;
+import locations.places.GrosseMoschee;
+import locations.places.GrosserMarkt;
+import locations.places.Karawanserei;
+import locations.places.KleineMoschee;
+import locations.places.KleinerMarkt;
+import locations.places.Obstlager;
+import locations.places.Polizeiwache;
+import locations.places.Postamt;
+import locations.places.Schwarzmarkt;
+import locations.places.Sultanspalast;
+import locations.places.Teestube;
+import locations.places.Tuchlager;
+import locations.places.Wagnerei;
 
 public class GameLogic {
 	
 	// 0 = bottom, size = top
 	private List<Location> locations = new ArrayList<Location>();
-
+	private List<String> takenSpot = new ArrayList<String>();
 	public GameLogic(){
-		
-		
-		
-		Collection<String> setLocations = new ArrayList<>();
-		
-		for(int i = 0; i<2; i++){			
-			int randColumn = (int)(Math.random() * 16)%4;
-			int randRow = (int)(Math.random() * 16)%4;
+			Location brunnen = new Brunnen();
+			Location teestube = new Teestube();
+			Location schwarzmarkt = new Schwarzmarkt();
+			Location kleinerMarkt = new KleinerMarkt();
+			Location grosserMarkt = new GrosserMarkt();
+			Location kleineMoschee = new KleineMoschee();
+			Location grosseMoschee = new GrosseMoschee();
+			Location wagnerei = new Wagnerei();
+			Location obstlager = new Obstlager();
+			Location gewuerzlager = new Gewuerzlager();
+			Location tuchlager = new Tuchlager();
+			Location postamt = new Postamt();
+			Location polizeiwache = new Polizeiwache();
+			Location sultanspalast = new Sultanspalast();
+			Location edelsteinhaendler = new Edelsteinhaendler();
+			Location karawanserei = new Karawanserei();
 			
-			Location brunnen = new Brunnen(randRow, randColumn);
 			this.locations.add(brunnen);
+			this.locations.add(teestube);
+			this.locations.add(schwarzmarkt);
+			this.locations.add(kleinerMarkt);
+			this.locations.add(grosserMarkt);
+			this.locations.add(kleineMoschee);
+			this.locations.add(grosseMoschee);
+			this.locations.add(wagnerei);
+			this.locations.add(obstlager);
+			this.locations.add(gewuerzlager);
+			this.locations.add(tuchlager);
+			this.locations.add(postamt);
+			this.locations.add(polizeiwache);
+			this.locations.add(sultanspalast);
+			this.locations.add(edelsteinhaendler);
+			this.locations.add(karawanserei);
 			
-//			if(!setLocations.contains(Location.getLocationCoordinates(randRow, randColumn))){				
-//				setLocations.add(Location.getLocationCoordinates(randRow, randColumn));
-//				addLocationToMap(AllAvailableLocations.get(i), randRow, randColumn);
-//			}else{
-//				i--;
-//				continue;
-//			}
+			int i = 0;
+			do{				
+				int randColumn = (int)(Math.random() * 4);
+				int randRow = (int)(Math.random() * 4);
+				if(!takenSpot.contains(Location.getLocationCoordinates(randRow, randColumn))){				
+					takenSpot.add(Location.getLocationCoordinates(randRow, randColumn));
+					System.out.println(Location.getLocationCoordinates(randRow, randColumn));
+					locations.get(i).setColumn(randColumn);
+					locations.get(i).setRow(randRow);
+					i++;
+				}else{
+					continue;
+				}
+				
+			}while(i<locations.size());
 			
-		}
-		
 
 	}
-	
-	private void prepareLocations(List<String> setOfLocations){
 
-		setOfLocations.add(Location.TEESTUBE);
-		setOfLocations.add(Location.BRUNNEN);
-		setOfLocations.add(Location.EDELSTEINHAENDLER);
-		setOfLocations.add(Location.KARAWANSEREI);
-		setOfLocations.add(Location.LAGER_GEWUERZ);
-		setOfLocations.add(Location.LAGER_OBST);
-		setOfLocations.add(Location.LAGER_TUCH);
-		setOfLocations.add(Location.MARKT_GROSS);
-		setOfLocations.add(Location.MARKT_KLEIN);
-		setOfLocations.add(Location.MOSCHEE_GROSS);
-		setOfLocations.add(Location.MOSCHEE_KLEIN);
-		setOfLocations.add(Location.POLIZEIWACHE);
-		setOfLocations.add(Location.SCHWARZMARKT);
-		setOfLocations.add(Location.WAGNEREI);
-		setOfLocations.add(Location.POSTAMT);
-		setOfLocations.add(Location.SULTANSPALAST);	
-	}
-	
-	private boolean isNonCapturedPieceAtLocation(int row, int column) {
-		for (Location piece : this.locations) {
-			if( piece.getRow() == row
-					&& piece.getColumn() == column
-					&& piece.isCaptured() == false){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * @return the internal list of pieces
-	 */
 	public List<Location> getLocations() {
 		return this.locations;
 	}
