@@ -10,8 +10,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import locations.Location;
 import locations.LocationGui;
+import locations.places.Brunnen;
 import logic.GameLogic;
 
 /**
@@ -90,7 +94,9 @@ public class IstanbulGui extends JPanel {
 	}
 
 	public static void main(String[] args) {
+
 		new IstanbulGui();
+		
 	}
 	
 	public static int convertColumnToX(int column){

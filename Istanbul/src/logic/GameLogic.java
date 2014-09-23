@@ -2,7 +2,8 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import locations.Location;
 import locations.places.Brunnen;
 import locations.places.Edelsteinhaendler;
@@ -27,39 +28,25 @@ public class GameLogic {
 	private List<Location> locations = new ArrayList<Location>();
 	private List<String> takenSpot = new ArrayList<String>();
 	public GameLogic(){
-			Location brunnen = new Brunnen();
-			Location teestube = new Teestube();
-			Location schwarzmarkt = new Schwarzmarkt();
-			Location kleinerMarkt = new KleinerMarkt();
-			Location grosserMarkt = new GrosserMarkt();
-			Location kleineMoschee = new KleineMoschee();
-			Location grosseMoschee = new GrosseMoschee();
-			Location wagnerei = new Wagnerei();
-			Location obstlager = new Obstlager();
-			Location gewuerzlager = new Gewuerzlager();
-			Location tuchlager = new Tuchlager();
-			Location postamt = new Postamt();
-			Location polizeiwache = new Polizeiwache();
-			Location sultanspalast = new Sultanspalast();
-			Location edelsteinhaendler = new Edelsteinhaendler();
-			Location karawanserei = new Karawanserei();
-			
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		Location brunnen = (Brunnen) context.getBean("brunnen");
+		
+			this.locations.add(new Karawanserei());
+			this.locations.add(new Teestube());
+			this.locations.add(new Schwarzmarkt());
+			this.locations.add(new KleinerMarkt());
+			this.locations.add(new GrosserMarkt());
+			this.locations.add(new KleineMoschee());
+			this.locations.add(new GrosseMoschee());
+			this.locations.add(new Wagnerei());
+			this.locations.add(new Obstlager());
+			this.locations.add(new Gewuerzlager());
+			this.locations.add(new Tuchlager());
+			this.locations.add(new Postamt());
+			this.locations.add(new Polizeiwache());
+			this.locations.add(new Sultanspalast());
+			this.locations.add(new Edelsteinhaendler());
 			this.locations.add(brunnen);
-			this.locations.add(teestube);
-			this.locations.add(schwarzmarkt);
-			this.locations.add(kleinerMarkt);
-			this.locations.add(grosserMarkt);
-			this.locations.add(kleineMoschee);
-			this.locations.add(grosseMoschee);
-			this.locations.add(wagnerei);
-			this.locations.add(obstlager);
-			this.locations.add(gewuerzlager);
-			this.locations.add(tuchlager);
-			this.locations.add(postamt);
-			this.locations.add(polizeiwache);
-			this.locations.add(sultanspalast);
-			this.locations.add(edelsteinhaendler);
-			this.locations.add(karawanserei);
 			
 			int i = 0;
 			do{				
@@ -68,8 +55,7 @@ public class GameLogic {
 				if(!takenSpot.contains(Location.getLocationCoordinates(randRow, randColumn))){				
 					takenSpot.add(Location.getLocationCoordinates(randRow, randColumn));
 					System.out.println(Location.getLocationCoordinates(randRow, randColumn));
-					locations.get(i).setColumn(randColumn);
-					locations.get(i).setRow(randRow);
+
 					i++;
 				}else{
 					continue;
