@@ -20,68 +20,71 @@ import locations.places.Sultanspalast;
 import locations.places.Teestube;
 import locations.places.Tuchlager;
 import locations.places.Wagnerei;
+import logic.locations.impl.LocationService;
+import logic.services.ServiceFactory;
 
 public class GameLogic {
-	
+
+	private LocationService locationService;
+
 	// 0 = bottom, size = top
 	private List<Location> locations = new ArrayList<Location>();
 	private List<String> takenSpot = new ArrayList<String>();
-	public GameLogic(){
-			Location brunnen = new Brunnen();
-			Location teestube = new Teestube();
-			Location schwarzmarkt = new Schwarzmarkt();
-			Location kleinerMarkt = new KleinerMarkt();
-			Location grosserMarkt = new GrosserMarkt();
-			Location kleineMoschee = new KleineMoschee();
-			Location grosseMoschee = new GrosseMoschee();
-			Location wagnerei = new Wagnerei();
-			Location obstlager = new Obstlager();
-			Location gewuerzlager = new Gewuerzlager();
-			Location tuchlager = new Tuchlager();
-			Location postamt = new Postamt();
-			Location polizeiwache = new Polizeiwache();
-			Location sultanspalast = new Sultanspalast();
-			Location edelsteinhaendler = new Edelsteinhaendler();
-			Location karawanserei = new Karawanserei();
-			
-			this.locations.add(brunnen);
-			this.locations.add(teestube);
-			this.locations.add(schwarzmarkt);
-			this.locations.add(kleinerMarkt);
-			this.locations.add(grosserMarkt);
-			this.locations.add(kleineMoschee);
-			this.locations.add(grosseMoschee);
-			this.locations.add(wagnerei);
-			this.locations.add(obstlager);
-			this.locations.add(gewuerzlager);
-			this.locations.add(tuchlager);
-			this.locations.add(postamt);
-			this.locations.add(polizeiwache);
-			this.locations.add(sultanspalast);
-			this.locations.add(edelsteinhaendler);
-			this.locations.add(karawanserei);
-			
-			int i = 0;
-			do{				
-				int randColumn = (int)(Math.random() * 4);
-				int randRow = (int)(Math.random() * 4);
-				if(!takenSpot.contains(Location.getLocationCoordinates(randRow, randColumn))){				
-					takenSpot.add(Location.getLocationCoordinates(randRow, randColumn));
-					System.out.println(Location.getLocationCoordinates(randRow, randColumn));
-					locations.get(i).setColumn(randColumn);
-					locations.get(i).setRow(randRow);
-					i++;
-				}else{
-					continue;
-				}
-				
-			}while(i<locations.size());
-			
+
+	public GameLogic() {
+
+		this.locations.add(getLocationService().buildLocation(Brunnen.class));
+		this.locations.add(getLocationService().buildLocation(Teestube.class));
+		this.locations.add(getLocationService().buildLocation(Schwarzmarkt.class));
+		this.locations.add(getLocationService().buildLocation(KleinerMarkt.class));
+		this.locations.add(getLocationService().buildLocation(GrosserMarkt.class));
+		this.locations.add(getLocationService().buildLocation(KleineMoschee.class));
+		this.locations.add(getLocationService().buildLocation(GrosseMoschee.class));
+		this.locations.add(getLocationService().buildLocation(Wagnerei.class));
+		this.locations.add(getLocationService().buildLocation(Obstlager.class));
+		this.locations.add(getLocationService().buildLocation(Gewuerzlager.class));
+		this.locations.add(getLocationService().buildLocation(Tuchlager.class));
+		this.locations.add(getLocationService().buildLocation(Postamt.class));
+		this.locations.add(getLocationService().buildLocation(Polizeiwache.class));
+		this.locations.add(getLocationService().buildLocation(Sultanspalast.class));
+		this.locations.add(getLocationService().buildLocation(Edelsteinhaendler.class));
+		this.locations.add(getLocationService().buildLocation(Karawanserei.class));
+
+		int i = 0;
+		do {
+			int randColumn = (int) (Math.random() * 4);
+			int randRow = (int) (Math.random() * 4);
+			if (!takenSpot.contains(Location.getLocationCoordinates(randRow,
+					randColumn))) {
+				takenSpot.add(Location.getLocationCoordinates(randRow,
+						randColumn));
+				System.out.println(Location.getLocationCoordinates(randRow,
+						randColumn));
+				locations.get(i).setColumn(randColumn);
+				locations.get(i).setRow(randRow);
+				i++;
+			} else {
+				continue;
+			}
+
+		} while (i < locations.size());
 
 	}
 
 	public List<Location> getLocations() {
 		return this.locations;
+	}
+	
+	public LocationService getLocationService() {
+		if (locationService == null) {
+			locationService = ServiceFactory.getService(LocationService.class);
+		}
+
+		return locationService;
+	}
+
+	public void setLocationService(LocationService locationService) {
+		this.locationService = locationService;
 	}
 
 }

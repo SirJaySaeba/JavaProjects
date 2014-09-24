@@ -2,30 +2,9 @@ package locations.places;
 
 import locations.Lager;
 
-public class Tuchlager extends Lager{
+public class Tuchlager extends Lager {
 
-	private static final String name = "tuchlager";
-	private int row;
-	private int column;
-
-	public String getName(){
-		return name;
+	public Tuchlager() {
+		super("tuchlager");
 	}
-	
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public int getColumn() {
-		return column;
-	}
-
-	public void setColumn(int column) {
-		this.column = column;
-	}
-
 }

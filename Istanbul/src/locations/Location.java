@@ -26,6 +26,11 @@ public class Location {
 		return image;
 	}
 
+	public Location(String name) {
+		super();
+		this.name = name;
+	}
+
 	public void setImage(Image image) {
 		this.image = image;
 	}
