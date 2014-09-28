@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import locations.Location;
-import locations.LocationGui;
 import logic.GameLogic;
 
 /**
@@ -32,8 +31,8 @@ public class IstanbulGui extends JPanel {
 	private static final int PIECE_WIDTH = 300;
 	private static final int PIECE_HEIGHT = 206;
 	
-	private static final int PIECES_START_X = BOARD_START_X + (int)(SQUARE_WIDTH/2.0 - PIECE_WIDTH/2.0);
-	private static final int PIECES_START_Y = BOARD_START_Y + (int)(SQUARE_HEIGHT/2.0 - PIECE_HEIGHT/2.0);
+	private static final int LOCATION_START_X = BOARD_START_X + (int)(SQUARE_WIDTH/2.0 - PIECE_WIDTH/2.0);
+	private static final int LOCATION_START_Y = BOARD_START_Y + (int)(SQUARE_HEIGHT/2.0 - PIECE_HEIGHT/2.0);
 	
 	private static final int DRAG_TARGET_SQUARE_START_X = BOARD_START_X - (int)(PIECE_WIDTH/2.0);
 	private static final int DRAG_TARGET_SQUARE_START_Y = BOARD_START_Y - (int)(PIECE_HEIGHT/2.0);
@@ -41,8 +40,7 @@ public class IstanbulGui extends JPanel {
 	private Image imgBackground;
 	
 	private GameLogic istanbulGame;
-	private List<LocationGui> guiLocations = new ArrayList<LocationGui>();
-
+	private List<Location> locations = new ArrayList<Location>();
 	public IstanbulGui() {
 		this.setLayout(null);
 
@@ -54,10 +52,12 @@ public class IstanbulGui extends JPanel {
 		this.istanbulGame = new GameLogic();
 		
 		//wrap game pieces into their graphical representation
-		for (Location location : this.istanbulGame.getLocations()) {
-			createAndAddGuiLocation(location);
-		}
+//		for (Location location : this.istanbulGame.getLocations()) {
+//			createAndAddGuiLocation(location);
+//		}
 
+		locations = this.istanbulGame.getLocations();
+		
 		JFrame f = new JFrame();
 		f.setSize(80, 80);
 		f.setVisible(true);
@@ -66,27 +66,13 @@ public class IstanbulGui extends JPanel {
 		f.setSize(imgBackground.getWidth(null), imgBackground.getHeight(null));
 	}
 
-	private void createAndAddGuiLocation(Location location) {
-		Image img = this.getImageForLocation(location.getName());
-		LocationGui guiLocation = new LocationGui(img, location);
-		this.guiLocations.add(guiLocation);
-	}
-
-	private Image getImageForLocation(String type) {
-
-		String filename = type+".png";
-
-		URL urlPieceImg = getClass().getResource("/img/" + filename);
-		return new ImageIcon(urlPieceImg).getImage();
-	}
-
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.drawImage(this.imgBackground, 0, 0, null);
 
-		for (LocationGui guiPiece : this.guiLocations) {
-				g.drawImage(guiPiece.getImage(), guiPiece.getX(), guiPiece.getY(), null);
-		}
+		for (Location location : this.locations) {
+			g.drawImage(location.getImage(), location.getX(), location.getY(), null);
+		}		
 	}
 
 	public static void main(String[] args) {
@@ -94,11 +80,11 @@ public class IstanbulGui extends JPanel {
 	}
 	
 	public static int convertColumnToX(int column){
-		return PIECES_START_X + SQUARE_WIDTH * column;
+		return LOCATION_START_X + SQUARE_WIDTH * column;
 	}
 	
 	public static int convertRowToY(int row){
-		return PIECES_START_Y + SQUARE_HEIGHT * (Location.ROW_4 - row);
+		return LOCATION_START_Y + SQUARE_HEIGHT * (Location.ROW_4 - row);
 	}
 	
 	public static int convertXToColumn(int x){

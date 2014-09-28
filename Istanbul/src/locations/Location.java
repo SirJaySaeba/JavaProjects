@@ -1,9 +1,14 @@
 package locations;
 
+import java.awt.Image;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+
+import gui.IstanbulGui;
+
 public class Location {
 
-	private String name;
-	
 	private int row;
 	public static final int ROW_1 = 0;
 	public static final int ROW_2 = 1;
@@ -15,6 +20,48 @@ public class Location {
 	public static final int COLUMN_B = 1;
 	public static final int COLUMN_C = 2;
 	public static final int COLUMN_D = 3;
+
+	private int x;
+	private int y;
+	private String name;
+	private Image img;
+	
+	public Location(){
+		this.name = getName();
+		this.img = getImageForLocation(getName());
+	}
+	
+	public Image getImage() {
+		return img;
+	}
+	
+	public void setImage() {
+		this.img = getImageForLocation(getName());
+	}
+
+	protected Image getImageForLocation(String type) {
+		
+		String filename = type+".png";
+		
+		URL urlPieceImg = getClass().getResource("/img/" + filename);
+		return new ImageIcon(urlPieceImg).getImage();
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
 
 	public int getRow() {
 		return row;
@@ -61,5 +108,9 @@ public class Location {
 	public static String getLocationCoordinates(int row, int column){
 		return getRowString(row)+"/"+getColumnString(column);
 	}
-
+	
+	public void resetLocationPosition() {
+		this.x = IstanbulGui.convertColumnToX(this.getColumn());
+		this.y = IstanbulGui.convertRowToY(this.getRow());
+	}
 }

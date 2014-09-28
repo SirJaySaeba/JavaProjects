@@ -9,14 +9,5 @@ public class Brunnen extends Location {
 	public String getName(){
 		return name;
 	}
-	
-
-//	private static Brunnen instance;
-//	public static synchronized Brunnen getInstance() {
-//		if (Brunnen.instance == null) {
-//			Brunnen.instance = new Brunnen(name, row, column);
-//		}
-//		return Brunnen.instance;
-//	}
 
 }
