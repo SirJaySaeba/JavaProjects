@@ -1,8 +1,5 @@
 package locations;
 
-import java.awt.Image;
-
-
 public class Location {
 
 	private String name;
@@ -18,17 +15,6 @@ public class Location {
 	public static final int COLUMN_B = 1;
 	public static final int COLUMN_C = 2;
 	public static final int COLUMN_D = 3;
-
-	private boolean isCaptured = false;
-	private Image image;
-
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
 
 	public int getRow() {
 		return row;
