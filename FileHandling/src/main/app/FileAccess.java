@@ -74,6 +74,24 @@ public class FileAccess {
 		}
 	}
 
+	private void findFile(final File folder){
+			
+			for (final File fileEntry : folder.listFiles()) {
+				try{
+					if (fileEntry.isDirectory()) {
+						findFile(fileEntry);
+					}else if(fileEntry.getName().toLowerCase().contains("daughters of night")){
+						System.out.println(fileEntry.getAbsolutePath());
+						continue;
+					}else{
+						//System.out.println("------------------------------");
+					}
+				}catch(NullPointerException ne){
+					System.out.println("??????????????????????????????????");
+				}
+			}
+	}
+	
 	private void renameFile(FileData fileData) {
 		File newFile = null;
 		String folderPath = fileData.getParent();
@@ -106,7 +124,7 @@ public class FileAccess {
 	private String replaceNameString(String fileName, String metaTitle, String metaTrackNo) {
 		
 		if(!(metaTitle == null || metaTitle == "")){
-			fileName = metaTitle;
+			fileName = metaTitle.replace(":", " - ").replace("?", "");
 		}else{
 			return fileName;
 		}
@@ -126,5 +144,6 @@ public class FileAccess {
 
 		File folder = new File(destination);
 		fa.checkAndRename(folder);
+		//fa.findFile(folder);
 	}
 }
