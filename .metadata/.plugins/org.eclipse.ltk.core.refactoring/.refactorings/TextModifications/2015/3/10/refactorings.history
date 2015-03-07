@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;temp&apos; in &apos;Sorting.getSmallest(...)&apos; to &apos;currentlySmallest&apos;&#x0D;&#x0A;- Original project: &apos;TextModifications&apos;&#x0D;&#x0A;- Original element: &apos;Sorting.getSmallest(int, List&lt;Integer&gt;).temp&apos;&#x0D;&#x0A;- Renamed element: &apos;temp&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;temp&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Sorting.java[Sorting~getSmallest~I~QList\&lt;QInteger;&gt;;@temp!462!475!466!469!I!0!false" name="currentlySmallest" references="true" stamp="1425683970049" version="1.0"/>
-</session>
