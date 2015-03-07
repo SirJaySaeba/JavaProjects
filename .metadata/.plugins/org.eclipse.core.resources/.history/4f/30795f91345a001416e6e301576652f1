@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MainApp {
+
+	public static void main(String[] args) {
+
+		List<Integer> numbers = new ArrayList<>();
+		List<Integer> sortedNumbers= new ArrayList<>();
+		
+		numbers.add(2);
+		numbers.add(5);
+		numbers.add(1);
+		numbers.add(3);
+		numbers.add(4);
+
+		for(int i=0; i<numbers.size(); i++){
+			for(int x=0; x<numbers.size(); x++){
+				if(numbers.get(i) < numbers.get(x)){
+					sortedNumbers.clear();
+					sortedNumbers.add(numbers.get(i));
+				}
+			}
+		}
+		
+		for(int i=0; i<sortedNumbers.size(); i++){
+			System.out.println(sortedNumbers.get(i));
+		}
+
+	}
+
+}

@@ -20,12 +20,15 @@ import locations.places.Sultanspalast;
 import locations.places.Teestube;
 import locations.places.Tuchlager;
 import locations.places.Wagnerei;
+import pawns.Pawn;
 
 public class GameLogic {
 	
 	// 0 = bottom, size = top
 	private List<Location> locations = new ArrayList<Location>();
 	private List<String> takenSpot = new ArrayList<String>();
+	private List<Pawn> pieces = new ArrayList<Pawn>();
+
 	public GameLogic(){
 			Location brunnen = new Brunnen();
 			Location teestube = new Teestube();
@@ -61,27 +64,41 @@ public class GameLogic {
 			this.locations.add(edelsteinhaendler);
 			this.locations.add(karawanserei);
 			
-			int i = 0;
+			int locationCounter = 0;
 			do{				
 				int randColumn = (int)(Math.random() * 4);
 				int randRow = (int)(Math.random() * 4);
 				if(!takenSpot.contains(Location.getLocationCoordinates(randRow, randColumn))){				
 					takenSpot.add(Location.getLocationCoordinates(randRow, randColumn));
 					System.out.println(Location.getLocationCoordinates(randRow, randColumn));
-					locations.get(i).setColumn(randColumn);
-					locations.get(i).setRow(randRow);
-					i++;
+					locations.get(locationCounter).setColumn(randColumn);
+					locations.get(locationCounter).setRow(randRow);
+					locations.get(locationCounter).resetLocationPosition();
+					locationCounter++;
 				}else{
 					continue;
 				}
 				
-			}while(i<locations.size());
+			}while(locationCounter<locations.size());
 			
+			int currentColumn = Location.COLUMN_A;
+			for (int i = 0; i < 8; i++) {
+				createAndAddPawn(Location.ROW_1, currentColumn);
+				currentColumn++;
+			}
 
+	}
+	private void createAndAddPawn(int row, int column) {
+		Pawn pawn = new Pawn(row, column);
+		this.pieces.add(pawn);
 	}
 
 	public List<Location> getLocations() {
 		return this.locations;
+	}
+	
+	public List<Pawn> getPieces() {
+		return this.pieces;
 	}
 
 }
