@@ -1,11 +1,10 @@
 public class Loan {
 
-	private static final double UNSCHEDULED_PAYMENT_PART = 0.05d;
-
 	// initial preconditions
 	private final double loanSum;
 	private final double interest;
-	private final double suggestedRuntime;
+	private final int suggestedRuntime;
+
 	private final double unscheduledPayment;
 	private final double rate;
 
@@ -14,12 +13,18 @@ public class Loan {
 	private double restDept;
 	private int actualRuntime;
 
-	public Loan(double loanSum, double interest, double runTime, double rate) {
+	public Loan(double loanSum, double interest, int runTime, double rate) {
+		final double UNSCHEDULED_PAYMENT_PART = 0.05d;
+
 		this.loanSum = loanSum;
 		this.interest = interest;
 		this.suggestedRuntime = runTime;
 		this.unscheduledPayment = loanSum * UNSCHEDULED_PAYMENT_PART;
 		this.rate = rate;
+	}
+
+	public int getSuggestedRuntime() {
+		return suggestedRuntime;
 	}
 
 	public double getPayedInterest() {
@@ -52,10 +57,6 @@ public class Loan {
 
 	public double getInterest() {
 		return interest;
-	}
-
-	public double getRunTime() {
-		return suggestedRuntime;
 	}
 
 	public double getUnscheduledPayment() {

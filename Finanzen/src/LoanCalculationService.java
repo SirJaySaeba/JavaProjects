@@ -37,8 +37,10 @@ public class LoanCalculationService {
 		return (restschuld * loan.getInterest()) / MONTHS;
 	}
 
-	public void payDept(int laufzeit, double restschuld) {
+	public void payDept() {
+		int laufzeit = loan.getSuggestedRuntime();
 		double payedInterest = 0.0d;
+		double restschuld = loan.getLoanSum();
 		int years = 0;
 		int months = 0;
 
@@ -50,8 +52,7 @@ public class LoanCalculationService {
 				laufzeit--;
 			}
 
-			System.out.println("Am Ende der Laufzeit bleiben "
-					+ decimalFormatter.format(restschuld) + " übrig.");
+			System.out.println("Am Ende der Laufzeit bleiben " + decimalFormatter.format(restschuld) + " übrig.");
 		} else {
 
 			while (restschuld > 0) {
@@ -62,16 +63,15 @@ public class LoanCalculationService {
 			years = getMonthsInYears(laufzeit)[0];
 			months = getMonthsInYears(laufzeit)[1];
 
-			System.out.println("Die Tilgung würde " + years + " Jahre und "
-					+ months + " Monate dauern");
+			System.out.println("Die Tilgung würde " + years + " Jahre und " + months + " Monate dauern");
 		}
 
 		loan.setPayedInterest(payedInterest);
 		loan.setRestDept(restschuld);
 		loan.setActualRuntime(laufzeit);
 
-		System.out.println("gezahlte Zinsen: "
-				+ decimalFormatter.format(payedInterest) + " €");
+		System.out.println("gezahlte Zinsen: " + decimalFormatter.format(payedInterest) + " €");
+		// System.out.println("gezahlte Zinsen: " + payedInterest + " €");
 	}
 
 	private int[] getMonthsInYears(int laufzeit) {

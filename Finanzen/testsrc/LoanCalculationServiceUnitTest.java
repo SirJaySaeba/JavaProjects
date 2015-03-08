@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.DecimalFormat;
@@ -22,16 +23,25 @@ public class LoanCalculationServiceUnitTest {
 		MockitoAnnotations.initMocks(this);
 
 		decimalFormatter = new DecimalFormat("##,##");
-		loan = new Loan(DARLEHEN, ZINS, LAUFZEIT, RATE);
-		service = new LoanCalculationService(loan);
+
 	}
 
 	@Test
-	public void testStuff() {
-
-		service.payDept(LAUFZEIT, DARLEHEN);
+	public void testPayToTheEnd() {
+		loan = new Loan(DARLEHEN, ZINS, 0, RATE);
+		service = new LoanCalculationService(loan);
+		service.payDept();
 		assertEquals(loan.getActualRuntime(), 89);
-		assertTrue(loan.getRestDept() == -215.127210430128);
+		assertFalse(loan.getRestDept() > 0);
 		assertTrue(loan.getPayedInterest() == 3441.122789569876);
+	}
+
+	@Test
+	public void testWithLimitedRuntime() {
+		loan = new Loan(DARLEHEN, ZINS, 60, RATE);
+		service = new LoanCalculationService(loan);
+		service.payDept();
+
+		assertTrue(loan.getPayedInterest() == 2831.693801914482);
 	}
 }
