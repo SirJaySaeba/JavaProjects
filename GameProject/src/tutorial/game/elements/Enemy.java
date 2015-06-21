@@ -5,6 +5,8 @@ import static tutorial.helpers.Clock.Delta;
 
 import org.newdawn.slick.opengl.Texture;
 
+import tutorial.helpers.Artist;
+
 public class Enemy {
 
 	private int width, height, health;
@@ -31,6 +33,11 @@ public class Enemy {
 			first = false;
 		} else {
 			x += Delta() * speed;
+		}
+		System.out.println(x);
+		if (Artist.WIDTH % x == 0) {
+			System.out.println(x + "/" + y);
+			System.out.println("-------------");
 		}
 	}
 

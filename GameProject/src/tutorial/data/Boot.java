@@ -2,6 +2,7 @@ package tutorial.data;
 
 import static tutorial.helpers.Artist.BeginSession;
 import static tutorial.helpers.Artist.QuickLoad;
+import static tutorial.helpers.Artist.getRandomMap;
 
 import org.lwjgl.opengl.Display;
 
@@ -16,14 +17,10 @@ public class Boot {
 
 		BeginSession();
 
-		final int[][] map = { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 1, 0, 0, 0, 0, 0, 0, 1, 0 },
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, };
-
-		final TileGrid grid = new TileGrid(map);
+		final TileGrid grid = new TileGrid(getRandomMap());
 		grid.setTile(0, 1, grid.getTile(1, 4).getType());
-		final Enemy e = new Enemy(2, 64, 64, 20, QuickLoad("goomba"), grid.getTile(1, 1));
-		final Wave wave = new Wave(10, e);
+		final Enemy e = new Enemy(2, 64, 64, 20, QuickLoad("goomba"), grid.getTile(0, 5));
+		final Wave wave = new Wave(100, e);
 		final Player player = new Player(grid);
 		while (!Display.isCloseRequested()) {
 			// first update, then draw!
@@ -34,7 +31,7 @@ public class Boot {
 			e.draw();
 			wave.update();
 			player.update();
-			;
+
 			Display.update();
 			Display.sync(50);
 		}
