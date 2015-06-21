@@ -1,6 +1,7 @@
 package tutorial.game.elements;
 
-import static tutorial.helpers.Artist.*;
+import static tutorial.helpers.Artist.DrawQuadTex;
+import static tutorial.helpers.Artist.QuickLoad;
 
 import org.newdawn.slick.opengl.Texture;
 
@@ -11,7 +12,7 @@ public class Tile {
 	private final float x, y, width, height;
 	private final TileType type;
 	private final Texture texture;
-	
+
 	public float getX() {
 		return x;
 	}
@@ -36,7 +37,7 @@ public class Tile {
 		return texture;
 	}
 
-	public Tile(float x, float y, float width, float height, TileType type) {
+	public Tile(final float x, final float y, final float width, final float height, final TileType type) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -44,8 +45,8 @@ public class Tile {
 		this.type = type;
 		this.texture = QuickLoad(type.getTextureName());
 	}
-	
-	public void draw(){
-		DrawQuadTex(x,y,width,height, texture);
+
+	public void draw() {
+		DrawQuadTex(x, y, width, height, texture);
 	}
 }

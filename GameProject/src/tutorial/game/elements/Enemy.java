@@ -1,7 +1,7 @@
 package tutorial.game.elements;
 
 import static tutorial.helpers.Artist.DrawQuadTex;
-import static tutorial.helpers.Clock.*;
+import static tutorial.helpers.Clock.Delta;
 
 import org.newdawn.slick.opengl.Texture;
 
@@ -12,8 +12,9 @@ public class Enemy {
 	private Texture texture;
 	private Tile startTile;
 	private boolean first;
-	
-	public Enemy(float speed, int width, int height, int health, Texture texture, Tile startTile) {
+
+	public Enemy(final float speed, final int width, final int height, final int health, final Texture texture,
+			final Tile startTile) {
 		this.x = startTile.getX();
 		this.y = startTile.getY();
 		this.startTile = startTile;
@@ -24,25 +25,24 @@ public class Enemy {
 		this.texture = texture;
 		this.first = true;
 	}
-	
-	public void update(){
-		if(first){
+
+	public void update() {
+		if (first) {
 			first = false;
-		}else{			
+		} else {
 			x += Delta() * speed;
 		}
 	}
-	
-	public void draw(){
-		DrawQuadTex(x,y,width,height, texture);
 
+	public void draw() {
+		DrawQuadTex(x, y, width, height, texture);
 	}
 
 	public int getWidth() {
 		return width;
 	}
 
-	public void setWidth(int width) {
+	public void setWidth(final int width) {
 		this.width = width;
 	}
 
@@ -50,7 +50,7 @@ public class Enemy {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	public void setHeight(final int height) {
 		this.height = height;
 	}
 
@@ -58,7 +58,7 @@ public class Enemy {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	public void setHealth(final int health) {
 		this.health = health;
 	}
 
@@ -66,7 +66,7 @@ public class Enemy {
 		return x;
 	}
 
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -74,7 +74,7 @@ public class Enemy {
 		return y;
 	}
 
-	public void setY(float y) {
+	public void setY(final float y) {
 		this.y = y;
 	}
 
@@ -82,7 +82,7 @@ public class Enemy {
 		return speed;
 	}
 
-	public void setSpeed(float speed) {
+	public void setSpeed(final float speed) {
 		this.speed = speed;
 	}
 
@@ -90,7 +90,7 @@ public class Enemy {
 		return texture;
 	}
 
-	public void setTexture(Texture texture) {
+	public void setTexture(final Texture texture) {
 		this.texture = texture;
 	}
 
@@ -98,7 +98,7 @@ public class Enemy {
 		return startTile;
 	}
 
-	public void setStartTile(Tile startTile) {
+	public void setStartTile(final Tile startTile) {
 		this.startTile = startTile;
 	}
 
@@ -106,9 +106,8 @@ public class Enemy {
 		return first;
 	}
 
-	public void setFirst(boolean first) {
+	public void setFirst(final boolean first) {
 		this.first = first;
 	}
-	
-	
+
 }
