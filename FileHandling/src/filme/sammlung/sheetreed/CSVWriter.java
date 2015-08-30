@@ -15,8 +15,10 @@ public class CSVWriter {
 	private static final String NAME = FileReaderCentral.MOVIE_NAME;
 	private static final String MEDIUM = FileReaderCentral.MOVIE_MEDIUM;
 	private static final String LICENSE = FileReaderCentral.MOVIE_LICENSE;
+	private static final String UNSEEN = FileReaderCentral.MOVIE_UNSEEN;
+	private static final String RENT = FileReaderCentral.MOVIE_RENT;
 	// CSV file header
-	private static final String[] FILE_HEADER = { ID, NAME, MEDIUM, LICENSE };
+	private static final String[] FILE_HEADER = { ID, NAME, MEDIUM, LICENSE, UNSEEN, RENT };
 
 	public static void writeCsvFile(final List<Movie> movies) {
 
@@ -45,6 +47,8 @@ public class CSVWriter {
 				movieDataRecord.add(movie.getName());
 				movieDataRecord.add(movie.getMedium());
 				movieDataRecord.add(movie.getLicense());
+				movieDataRecord.add(movie.getUnseen());
+				movieDataRecord.add(movie.getRent());
 				csvFilePrinter.printRecord(movieDataRecord);
 			}
 

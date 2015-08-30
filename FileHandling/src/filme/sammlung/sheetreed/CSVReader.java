@@ -1,7 +1,10 @@
 package filme.sammlung.sheetreed;
 
-import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +19,14 @@ public class CSVReader {
 	private static final String NAME = FileReaderCentral.MOVIE_NAME;
 	private static final String MEDIUM = FileReaderCentral.MOVIE_MEDIUM;
 	private static final String LICENSE = FileReaderCentral.MOVIE_LICENSE;
+	private static final String UNSEEN = FileReaderCentral.MOVIE_UNSEEN;
+	private static final String RENT = FileReaderCentral.MOVIE_RENT;
 
-	private static final String[] FILE_HEADER_MAPPING = { ID, NAME, MEDIUM, LICENSE };
+	private static final String[] FILE_HEADER_MAPPING = { ID, NAME, MEDIUM, LICENSE, UNSEEN, RENT };
 
 	public static List<Movie> readCsvFile(final String fileName) {
 
-		FileReader fileReader = null;
+		Reader fileReader = null;
 
 		CSVParser csvFileParser = null;
 
@@ -34,32 +39,28 @@ public class CSVReader {
 			// Create a new list of student to be filled by CSV file data
 
 			// initialize FileReader object
-			fileReader = new FileReader(fileName);
-
+			fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "Cp1252"));
 			// initialize CSVParser object
 			csvFileParser = new CSVParser(fileReader, csvFileFormat);
 
 			// Get a list of CSV file records
 			final List<CSVRecord> csvRecords = csvFileParser.getRecords();
 
-			// Read the CSV file records starting from the second record to skip
-			// the header
 			String idPrefix = "";
 			for (final CSVRecord record : csvRecords) {
-				// Create a new student object and fill his data
 				if (record.getRecordNumber() == 1) {
 					idPrefix = record.get(0);
 					continue;
 				}
+				if (record.get(NAME).equals("")) {
+					continue;
+				}
+
 				final Movie movie = new Movie(record.get(NAME), idPrefix + record.get(ID), record.get(MEDIUM),
-						record.get(LICENSE));
+						record.get(LICENSE), record.get(UNSEEN), record.get(RENT));
 				movies.add(movie);
 			}
 
-			// Print the new student list
-			for (final Movie movie : movies) {
-				System.out.println(movie.getName());
-			}
 		} catch (final Exception e) {
 			System.out.println("Error in CsvFileReader !!!");
 			e.printStackTrace();
