@@ -22,7 +22,7 @@ public class Boot {
 
 		final TileGrid grid = new TileGrid(map);
 		grid.setTile(0, 1, grid.getTile(1, 4).getType());
-		final Enemy e = new Enemy(2, 64, 64, 20, QuickLoad("goomba"), grid.getTile(1, 1));
+		final Enemy e = new Enemy(2, 64, 64, 20, QuickLoad("goomba"), grid.getTile(1, 1), grid);
 		final Wave wave = new Wave(10, e);
 		final Player player = new Player(grid);
 		while (!Display.isCloseRequested()) {

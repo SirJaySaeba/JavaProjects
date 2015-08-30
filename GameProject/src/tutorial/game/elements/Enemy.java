@@ -5,6 +5,9 @@ import static tutorial.helpers.Clock.Delta;
 
 import org.newdawn.slick.opengl.Texture;
 
+import tutorial.data.TileType;
+import tutorial.helpers.TileGrid;
+
 public class Enemy {
 
 	private int width, height, health;
@@ -12,9 +15,10 @@ public class Enemy {
 	private Texture texture;
 	private Tile startTile;
 	private boolean first;
+	private final TileGrid tileGrid;
 
 	public Enemy(final float speed, final int width, final int height, final int health, final Texture texture,
-			final Tile startTile) {
+			final Tile startTile, final TileGrid tileGrid) {
 		this.x = startTile.getX();
 		this.y = startTile.getY();
 		this.startTile = startTile;
@@ -24,18 +28,37 @@ public class Enemy {
 		this.health = health;
 		this.texture = texture;
 		this.first = true;
+		this.tileGrid = tileGrid;
 	}
 
 	public void update() {
 		if (first) {
 			first = false;
 		} else {
-			x += Delta() * speed;
+			if (continuePath()) {
+				x += Delta() * speed;
+			}
 		}
+	}
+
+	private boolean continuePath() {
+		final int tileSize = TileType.TILE_SIZE;
+		final Tile currentTile = tileGrid.getTile((int) x / tileSize, (int) y / tileSize);
+		final Tile nextTile = tileGrid.getTile((int) x / tileSize + 1, (int) y / tileSize);
+
+		if (currentTile.getType() != nextTile.getType()) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public void draw() {
 		DrawQuadTex(x, y, width, height, texture);
+	}
+
+	public TileGrid getTileGrid() {
+		return tileGrid;
 	}
 
 	public int getWidth() {
